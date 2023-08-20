@@ -9,14 +9,14 @@ function App() {
   const [showPassword, setShowPassword] = useState(true);
   const [errMsg, setErrMSG] = useState("");
   const [loading, setIsloading] = useState(false);
-  // const [url, setUrl] = useState(window.location.href);
+  const [url, setUrl] = useState(window.location.href);
 
-  // useEffect(() => {
-  //   setUrl(window.location.href);
-  // }, [url]);
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, [url]);
 
-  // const redirectURL = url.split("=")[1];
-  // console.log(redirectURL);
+  const redirectURL = url.split("=")[1];
+  console.log(redirectURL);
 
   // "http://localhost:3000?redirect_url=https://ll04-finance-dowell.github.io/workflowai.online"
 
@@ -25,14 +25,20 @@ function App() {
 
     setIsloading(true);
     try {
-      const res = await axios.post("http://localhost:5000/users/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://dwserver-lzvl.onrender.com/users/login",
+        {
+          username,
+          password,
+        }
+      );
       if (res.status === 200) {
-        window.location.href = res.data.user.link.split("/")[1];
+        if (redirectURL) {
+          window.location.href = redirectURL;
+        }
 
         setIsloading(false);
+        console.log(res);
       }
     } catch (err) {
       setErrMSG(err?.response?.data);
