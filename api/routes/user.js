@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
         //   process.env.JWT
         // );
         const link =
-          "http://localhost:3000?redirect_url=https://ll04-finance-dowell.github.io/workflowai.online";
+          "https://dowellplugin.netlify.app/?redirect_url=https://ll04-finance-dowell.github.io/workflowai.online";
         const q =
           "INSERT INTO users(`username`,`password`,`organization`,`portfolio`,`product`,`link`,`isAdmin`,`uxLivingLabAdminId`) VALUES (?)";
 
